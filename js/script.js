@@ -12,6 +12,9 @@ let randNumArray;
 //prendo il div row per dove stamperò i numeri
 const showNumb = document.getElementById('show-numbers');
 
+//prendo il div row dove stapero gli input
+const showInput = document.getElementById('show-input');
+
 let inputUser;
 
 
@@ -35,11 +38,11 @@ function playGame() {
     printNumb();
     // timeout di 30 secondi
     const number1 = setTimeout(yourInput, 5000);
-        //clearTimeout(number1);
-        //prendo input dell’utente con funzione
-        //inputUser = inputReader();
-    
-    
+    //clearTimeout(number1);
+    //prendo input dell’utente con funzione
+    //inputUser = inputReader();
+
+
 
 
 }
@@ -62,11 +65,12 @@ function rndDifferentNumb() {
 }
 // funzione stampare i numeri a schermo
 function yourInput() {
-    let input = document.createElement('input');
+    //let input = document.createElement('input');
     const btnInput = document.getElementById('btn-input');
 
     console.clear();
     showNumb.classList.add('d-none');
+    printInput();
     console.log('adesso è il tuo turno, inserisci i numeri');
     //faccio apparire input con un listener
     //al click del bottone leggo il valore
@@ -77,31 +81,58 @@ function inputReader() {
     // prendo gli input e leggo il valore
 
     //creo array con un ciclo for
-    inputUser = [2, 12, 22, 20, 88];
+    inputUser = [];
     // ciclo for
-    //for (let index = 0; index < array.length; index++) {
-    //    const element = array[index];
-    //    
-    //}
-    let score = matchNum().length;    
-    return console.log('l\'utente inserisce questi numeri: ' + inputUser +'e questo è il tuo punteggio: '+ score);
-    
+    for (let index = 0; index < randNumArray.length; index++) {
+        const element = parseInt(document.getElementsByTagName('input')[index].value);
+        inputUser.push(element);
+    }
+    let score = matchNum().length;
+    return console.log('l\'utente inserisce questi numeri: ' + inputUser + 'e questo è il tuo punteggio: ' + score);
+
 }
 //stampo numeri a schermo
 function printNumb() {
     for (let index = 0; index < randNumArray.length; index++) {
         const element = randNumArray[index];
         const divCol = document.createElement('div');
-        const divSquare= document.createElement('div');
+        const divSquare = document.createElement('div');
         divCol.classList.add('col');
         divSquare.classList.add('square');
         divCol.append(divSquare);
-        divSquare.innerHTML=`<h2> ${element}</h2> `;
+        divSquare.innerHTML = `<h2> ${element}</h2> `;
         showNumb.append(divCol);
 
-        
+
     }
 
+
+
+}
+//stampo campi di input
+function printInput() {
+    for (let index = 0; index < randNumArray.length; index++) {
+        const divCol = document.createElement('div');
+        const divInput = document.createElement('input');
+        divCol.classList.add('col');
+        divInput.classList.add('form-control');
+        divInput.setAttribute('type', 'number');
+        divInput.setAttribute('maxlength', '1');
+        divInput.setAttribute('id', 'key' + (index + 1))
+        //divInput.addEventListener('oninput', onchechnge);
+        divCol.append(divInput);
+        showInput.append(divCol);
+    }
+
+}
+// funzione per passare da un input all altro
+function onchechnge(i) {
+    let dom = document.getElementById("key" + i);
+    let ml = dom.maxLength;
+    let lg = dom.value.length;
+    if (lg >= ml) {
+        document.getElementById("key" + (i + 1)).focus()
+    }
 }
 // funzione che confronta le due array creandone una nuova con i match;
 function matchNum() {
@@ -113,16 +144,6 @@ function matchNum() {
         }
 
     }
-    
+
     return matchArray;
 }
-// funzione per passare da un input all altro
-function onchechnge(i) {
-    let dom = document.getElementById("key" + i);
-    let ml = dom.maxLength;
-    let lg = dom.value.length;
-    if (lg >= ml) {
-        document.getElementById("key" + (i + 1)).focus()
-    }
-}
-// onchechnge();
