@@ -8,8 +8,13 @@ const max = 100;
 const btnPlay = document.getElementById('btn-play');
 btnPlay.addEventListener('click', playGame);
 //creo array con numeri casuali (senza numeri uguali tra uno e cento)
-let randNumArray = rndDifferentNumb();
-console.log(randNumArray);
+let randNumArray;
+
+let inputUser;
+
+
+
+
 
 
 
@@ -20,57 +25,88 @@ console.log(randNumArray);
 
 //funzione playGame
 function playGame() {
+
     //mostro i numeri per 30 secondi
+    randNumArray = null;
+    randNumArray = rndDifferentNumb();
     console.log('Ecco i 5 numeri. \n Hai 30s per memorizzarli :' + randNumArray);
     // timeout di 30 secondi
     const number1 = setTimeout(yourInput, 5000);
-    //clearTimeout(number1);
-    //prendo input dell’utente con funzione
-    let inputUser = [1,22,58,41,5]; //inputReader()
+        //clearTimeout(number1);
+        //prendo input dell’utente con funzione
+        //inputUser = inputReader();
+    
+    
 
 
 }
 
 //funzione rndDifferentNumb
 function rndDifferentNumb() {
-   
+
     const array = [];
 
-    
+
     let count = 0;
     while (array.length < totNum || count === 200) {
         const num = getRndInteger(min, max);
         if (!array.includes(num)) {
             array.push(num);
-        }count++
-    } 
-    
+        } count++
+    }
+
     return array;
 }
 // funzione stampare i numeri a schermo
-function yourInput(){
-    let input = document.createElement(input);
+function yourInput() {
+    let input = document.createElement('input');
+    const btnInput = document.getElementById('btn-input');
+
     console.clear();
     console.log('adesso è il tuo turno, inserisci i numeri');
     //faccio apparire input con un listener
     //al click del bottone leggo il valore
-    
+    btnInput.addEventListener('click', inputReader);
 }
 //leggo valore inserito in input
-function inputReader(){
+function inputReader() {
+    // prendo gli input e leggo il valore
 
+    //creo array con un ciclo for
+    inputUser = [2, 12, 22, 20, 88];
+    // ciclo for
+    //for (let index = 0; index < array.length; index++) {
+    //    const element = array[index];
+    //    
+    //}
+    let score = matchNum().length;    
+    return console.log('l\'utente inserisce questi numeri: ' + inputUser +'e questo è il tuo punteggio: '+ score);
+    
 }
 //stampo numeri a schermo
-function printNumb(){
+function printNumb() {
 
 }
+// funzione che confronta le due array creandone una nuova con i match;
+function matchNum() {
+    const matchArray = [];
+    for (let i = 0; i < randNumArray.length; i++) {
+        const element = randNumArray[i];
+        if (inputUser.includes(element)) {
+            matchArray.push(element)
+        }
+
+    }
+    
+    return matchArray;
+}
 // funzione per passare da un input all altro
-function onchechnge(i){
-    let dom = document.getElementById("key"+i);
+function onchechnge(i) {
+    let dom = document.getElementById("key" + i);
     let ml = dom.maxLength;
     let lg = dom.value.length;
     if (lg >= ml) {
-        document.getElementById("key"+(i+1)).focus()
+        document.getElementById("key" + (i + 1)).focus()
     }
 }
 // onchechnge();
