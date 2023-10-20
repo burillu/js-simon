@@ -9,6 +9,8 @@ const btnPlay = document.getElementById('btn-play');
 btnPlay.addEventListener('click', playGame);
 //creo array con numeri casuali (senza numeri uguali tra uno e cento)
 let randNumArray;
+//prendo il div row per dove stamperò i numeri
+const showNumb = document.getElementById('show-numbers');
 
 let inputUser;
 
@@ -30,6 +32,7 @@ function playGame() {
     randNumArray = null;
     randNumArray = rndDifferentNumb();
     console.log('Ecco i 5 numeri. \n Hai 30s per memorizzarli :' + randNumArray);
+    printNumb();
     // timeout di 30 secondi
     const number1 = setTimeout(yourInput, 5000);
         //clearTimeout(number1);
@@ -63,6 +66,7 @@ function yourInput() {
     const btnInput = document.getElementById('btn-input');
 
     console.clear();
+    showNumb.classList.add('d-none');
     console.log('adesso è il tuo turno, inserisci i numeri');
     //faccio apparire input con un listener
     //al click del bottone leggo il valore
@@ -85,6 +89,18 @@ function inputReader() {
 }
 //stampo numeri a schermo
 function printNumb() {
+    for (let index = 0; index < randNumArray.length; index++) {
+        const element = randNumArray[index];
+        const divCol = document.createElement('div');
+        const divSquare= document.createElement('div');
+        divCol.classList.add('col');
+        divSquare.classList.add('square');
+        divCol.append(divSquare);
+        divSquare.innerHTML=`<h2> ${element}</h2> `;
+        showNumb.append(divCol);
+
+        
+    }
 
 }
 // funzione che confronta le due array creandone una nuova con i match;

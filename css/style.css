@@ -1,0 +1,10 @@
+.square{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    background-color: beige;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 3px dotted gray;
+}
