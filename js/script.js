@@ -20,7 +20,11 @@ console.log(randNumArray);
 
 //funzione playGame
 function playGame() {
-    console.log('stiamo giocando');
+    console.log('Ecco i 5 numeri. \n Hai 30s per memorizzarli :' + randNumArray);
+    const number1 = setTimeout(yourInput, 5000);
+    //clearTimeout(number1);
+
+
 }
 
 //funzione rndDifferentNumb
@@ -39,4 +43,11 @@ function rndDifferentNumb() {
     
     return array;
 }
-
+// funzione stampare i numeri a schermo
+function yourInput(){
+    //element = document.getElementById(target);
+    console.clear();
+    console.log('adesso è il tuo turno, inserisci i numeri');
+    //faccio apparire input
+    //al click del bottone leggo il valore
+}
