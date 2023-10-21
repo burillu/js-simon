@@ -20,22 +20,32 @@
 </head>
 
 <body>
-  <div class="container my-3">
-    <div class="">
+  <div class="img-bg">
+    <div class="container my-bg-white-transp rounded-2 fs-4">
+    <h1 class="text-center text-center py-3"> 5 Numeri</h1>
+    <div class="intro">
+      <p class="w-75 m-auto">
+        Questo gioco è molto semplice: devi memorizzare <span class="text-decoration-underline">5 numeri</span>.  <br>
+        Hai <span class="text-decoration-underline">30 secondi</span>  a disposizione, e poi avrai la possibilità di inserire i numeri che hai visto in precedenza. <br>
+        Adesso concentrati e quando sei pronto premi il tasto 'Gioca!'. 
+      </p>
+    </div>
+    <!-- <img src="https://www.arealme.com/cover-images/number-memory-test.png" alt="brain-numbers-memory" class="brain-img"> -->
+    <div class="text-center">
 
       <button class="btn btn-primary" id="btn-play">
         Gioca!
       </button>
     </div>
-    <div class="row my-3 bg-secondary" id="show-numbers">
+    <div class="row my-3 my-bg-numbers justify-content-center" id="show-numbers">
 
 
     </div>
-    <div class="row my-3" id="show-input">
+    <div class="row my-3 justify-content-center my-bg-numbers align-items-center text-center" id="show-input">
 
     </div>
     <button class="btn btn-primary" id="btn-input"> Controlla i Numeri</button>
-    <div class="row" id="show-result">
+    <div class="row justify-content-center my-bg-numbers" id="show-result">
 
     </div>
     <div class="bg-secondary" id="show-score"></div>
@@ -48,6 +58,8 @@
   </fieldset> -->
     
   </div>
+  </div>
+  
   <script src="js/utility.js"></script>
   <script src="js/script.js"></script>
 </body>

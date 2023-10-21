@@ -1,3 +1,9 @@
+/* body{
+     background-image: linear-gradient(to bottom, #e5dd2d, #88e56c, #00e2af, #00d7e2, #00c5f7, #41b8e9, #57abda, #659ec9, #5a94b0, #578997, #597c80, #5c6f6e);
+    background-repeat: no-repeat; 
+
+} */
+
 .square{
     width: 100px;
     height: 100px;
@@ -7,4 +13,21 @@
     align-items: center;
     border-radius: 10px;
     border: 3px dotted gray;
+}
+.img-bg{
+    background-image: url(https://www.arealme.com/cover-images/number-memory-test.png);
+    background-size: cover;
+    height: 100vh;
+}
+.my-bg-numbers{
+    background-color: #66666693;
+
+}
+
+.brain-img{
+    width: 100%;
+}
+.my-bg-white-transp{
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
 }

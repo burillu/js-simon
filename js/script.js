@@ -31,6 +31,8 @@ function fiveNumberGame() {
 
     let inputUser;
 
+    let matchArray;
+
 
 
 
@@ -103,8 +105,11 @@ function fiveNumberGame() {
             const element = parseInt(document.getElementsByTagName('input')[index].value);
             inputUser.push(element);
         }
-
+        matchArray = matchNum();
         gameOver();
+        evidenceMatch();
+
+
         //let score = matchNum().length;
         //return console.log('l\'utente inserisce questi numeri: ' + inputUser + 'e questo è il tuo punteggio: ' + score);
 
@@ -116,7 +121,7 @@ function fiveNumberGame() {
             const element = randNumArray[index];
             const divCol = document.createElement('div');
             const divSquare = document.createElement('div');
-            divCol.classList.add('col');
+            divCol.classList.add('col-2');
             divSquare.classList.add('square');
             divCol.append(divSquare);
             (isNaN(element)) ? divSquare.innerHTML = `<h2> ## </h2> ` : divSquare.innerHTML = `<h2> ${element}</h2> `;
@@ -133,7 +138,7 @@ function fiveNumberGame() {
         for (let index = 0; index < randNumArray.length; index++) {
             const divCol = document.createElement('div');
             const divInput = document.createElement('input');
-            divCol.classList.add('col');
+            divCol.classList.add('col-2');
             divInput.classList.add('form-control');
             divInput.setAttribute('type', 'number');
             divInput.setAttribute('maxlength', '1');
@@ -145,13 +150,15 @@ function fiveNumberGame() {
 
     }
     // funzione per passare da un input all altro
-    function onchechnge(i) {
-        let dom = document.getElementById("key" + i);
-        let ml = dom.maxLength;
-        let lg = dom.value.length;
-        if (lg >= ml) {
-            document.getElementById("key" + (i + 1)).focus()
-        }
+    function onchechnge() {
+        // ciclo sulla collectione degli input
+
+        // let dom = document.getElementById("key" + i);
+        // let ml = dom.maxLength;
+        // let lg = dom.value.length;
+        // if (lg >= ml) {
+        //     document.getElementById("key" + (i + 1)).focus()
+        // }
     }
     // funzione che confronta le due array creandone una nuova con i match;
     function matchNum() {
@@ -165,6 +172,17 @@ function fiveNumberGame() {
         }
 
         return matchArray;
+    }
+    function evidenceMatch() {
+        for (let index = 0; index < matchArray.length; index++) {
+            const element = matchArray[index];
+            let bg;
+            const divResult = showResult.getElementsByClassName('square');
+            if (randNumArray.includes(element)) {
+                bg= 'bg-success';
+            }
+            divResult[index].classList.add(bg);
+        }
     }
     function gameOver() {
         //rimuovo il listener dal bottone controlla i numeri
@@ -182,7 +200,8 @@ function fiveNumberGame() {
     }
     function printScore() {
         const element = document.createElement('h2');
-        let score = matchNum().length;
+
+        score = matchArray.length;
         element.classList.add('text-center');
         element.innerText = `Il tuo Punteggio è ${score}`;
         showScore.append(element);
