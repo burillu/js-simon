@@ -54,7 +54,7 @@ function fiveNumberGame() {
         console.log('Ecco i 5 numeri. \n Hai 30s per memorizzarli :' + randNumArray);
         printNumb(randNumArray, showNumb);
         // timeout di 30 secondi
-        const number1 = setTimeout(yourInput, 3000);
+        const number1 = setTimeout(yourInput, 30000);
         //clearTimeout(number1);
         //prendo input dell’utente con funzione
         //inputUser = inputReader();
@@ -85,7 +85,7 @@ function fiveNumberGame() {
         //let input = document.createElement('input');
         // showInput.innerHTML = '';
 
-        console.clear();
+        //console.clear();
         showNumb.classList.add('d-none');
         btnInput.classList.remove('d-none');
         printInput();
@@ -107,7 +107,9 @@ function fiveNumberGame() {
         }
         matchArray = matchNum();
         gameOver();
+        //confronto il risultato
         evidenceMatch();
+        
 
 
         //let score = matchNum().length;
@@ -123,6 +125,7 @@ function fiveNumberGame() {
             const divSquare = document.createElement('div');
             divCol.classList.add('col-2');
             divSquare.classList.add('square');
+            //divSquare.style.backgroundColor='beige';
             divCol.append(divSquare);
             (isNaN(element)) ? divSquare.innerHTML = `<h2> ## </h2> ` : divSquare.innerHTML = `<h2> ${element}</h2> `;
             target.append(divCol);
@@ -141,24 +144,29 @@ function fiveNumberGame() {
             divCol.classList.add('col-2');
             divInput.classList.add('form-control');
             divInput.setAttribute('type', 'number');
-            divInput.setAttribute('maxlength', '1');
+            divInput.setAttribute('maxlength', '3');
             divInput.setAttribute('id', 'key' + (index + 1))
-            //divInput.addEventListener('oninput', onchechnge);
+            divInput.addEventListener('input', autoSwitchInput);
             divCol.append(divInput);
             showInput.append(divCol);
         }
 
     }
     // funzione per passare da un input all altro
-    function onchechnge() {
-        // ciclo sulla collectione degli input
+    function autoSwitchInput(e) {
 
-        // let dom = document.getElementById("key" + i);
-        // let ml = dom.maxLength;
-        // let lg = dom.value.length;
-        // if (lg >= ml) {
-        //     document.getElementById("key" + (i + 1)).focus()
-        // }
+        const inputCollect = Array.prototype.slice.call(document.getElementsByTagName('input'));
+        const element = e.srcElement;
+        let i = inputCollect.indexOf(e.srcElement);
+
+        let ml = element.maxLength;
+        let lg = element.value.length;
+        if (lg >= ml && i < inputCollect.length - 1) {
+            inputCollect[i + 1].focus();
+        }
+
+
+
     }
     // funzione che confronta le due array creandone una nuova con i match;
     function matchNum() {
@@ -174,15 +182,26 @@ function fiveNumberGame() {
         return matchArray;
     }
     function evidenceMatch() {
-        for (let index = 0; index < matchArray.length; index++) {
+        for (let index = 0; index < randNumArray.length; index++) {
             const element = matchArray[index];
-            let bg;
             const divResult = showResult.getElementsByClassName('square');
+            //divResult.style.backgroundColor='none';
+            const elementIndex = inputUser.indexOf(element);
+            let bg='';
+            //return console.log('indice dell elemento:'+ elementIndex);
+            //divResult[index].classList.add(bg);
             if (randNumArray.includes(element)) {
-                bg= 'bg-success';
-            }
-            divResult[index].classList.add(bg);
+                bg = 'bg-success';
+                //divResult[elementIndex].classList.remove('bg-danger');
+                divResult[elementIndex].classList.add(bg);
+            }// else {// 
+            //     bg = 'bg-danger';
+            //     console.log ('Sfondo rosso' + index)
+            
+            // }
+            
         }
+        
     }
     function gameOver() {
         //rimuovo il listener dal bottone controlla i numeri
@@ -192,8 +211,10 @@ function fiveNumberGame() {
         //scompare l'input e il bottone
         btnInput.classList.add('d-none');
         showInput.classList.add('d-none');
-        //stampo i numeri inseriti dall'utente
+        
+//stampo i numeri inseriti dall'utente
         printNumb(inputUser, showResult);
+        
         // scrivo il punteggio
         printScore();
 

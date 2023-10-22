@@ -21,3 +21,28 @@ function getRndInteger(min, max) {
 function isEven (num){
     return (num % 2 === 0) ? true : false;
 }
+
+
+ 
+
+/**
+ * // funzione per passare da un input all altro una volta raggiunto il maxlength di ogni elemento
+ * @param {*} e 
+ */
+
+
+ function autoSwitchInput(e) {
+        
+  const inputCollect = Array.prototype.slice.call (document.getElementsByTagName('input'));
+  const element = e.srcElement;
+  let i = inputCollect.indexOf(e.srcElement);
+  
+  let ml = element.maxLength;
+  let lg = element.value.length;
+  if (lg >= ml && i <inputCollect.length -1) {
+       inputCollect[i+1].focus();
+   }
+  
+  
+  
+}
